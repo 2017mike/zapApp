@@ -1,0 +1,23 @@
+.dialogtitle {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 2rem;
+  border-top: 5px solid rgba(0,0,0,0.5);
+}
+
+.public-DraftStyleDefault-block {
+    margin: 0;
+}
+
+.replytext p {
+  margin: 2px;
+  margin-left: 20px;
+}
+
+.superFancyBlockquote, blockquote {
+  color: #000;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #ccc;
+  border-left: 5px solid rgb(113, 153, 116);
+  text-align: center;
+  padding: 10px;
+}

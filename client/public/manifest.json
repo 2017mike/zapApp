@@ -1,0 +1,9 @@
+{
+  "short_name": "Zap App",
+  "name": "Bugtracker Project Management App that lets you ask the community for help on your issues",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

@@ -1,0 +1,18 @@
+.contactcontainer {
+  max-width: 1200px;
+  margin: auto;
+  background: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+
+.socialmedia {
+  text-align: center;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.fab {
+  margin: 0 1rem;
+  /* font-size: 1.15rem !important; */
+  color: #999;
+}
