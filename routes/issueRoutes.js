@@ -3,12 +3,27 @@ const { Issue, Reply, Project, User } = require('../models')
 const passport = require('passport')
 
 // get all issues that has isPublic is true
-router.get('/issues/public', (req, res) => {
-  Project.find({})
-    .populate('author')
-    .then(issues => res.json(issues))
-    .catch(err => console.log(err))
-})
+// router.get('/issues/public', (req, res) => {
+//   Project.find({})
+//     .populate('author')
+//     .then(issues => res.json(issues))
+//     .catch(err => console.log(err))
+// })
+
+router.get("/issues/public", passport.authenticate("jwt"), (req, res) => {
+  Issue.find({isPublic: true})
+    .populate("author")
+    .populate({
+      path: "replies",
+      model: "Reply",
+      populate: {
+        path: "author",
+        model: "User",
+      },
+    })
+    .then((issues) => res.json(issues))
+    .catch((err) => console.log(err));
+});
 
 //get issue by id
 router.get('/issues/:id', passport.authenticate('jwt'), (req, res) => {

@@ -82,7 +82,7 @@ const Help = () => {
 
   //displays all comm issues
   useEffect(() => {
-    IssueAPI.getAll()
+    IssueAPI.getAllPublic()
       .then( ({ data: issues}) => {
         issues.map(issue => ({
           ...issue,

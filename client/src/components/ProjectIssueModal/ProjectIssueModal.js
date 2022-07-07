@@ -210,6 +210,7 @@ const ProjectModal = props => {
   const [showEditDesc, setShowEditDesc] = useState(false)
 
   const handleGoPublic = () => {
+  
     IssueAPI.update(props.id, {
       isPublic: issuePublic
     })
@@ -218,8 +219,6 @@ const ProjectModal = props => {
         window.location = '/help'
       })
       .catch(err => console.log('Problem in the ProjectIssueModal', err))
-
-
   }
 
   const handleUpdateIssue = () => {

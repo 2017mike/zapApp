@@ -45,7 +45,6 @@ const Projects = () => {
         data=data.data.projects.reverse()
         setProjectState(data)
         console.log('this is projectState in Projects.js', projectState)
-      
       })
       .catch(err => console.log(err))
   }, [])
