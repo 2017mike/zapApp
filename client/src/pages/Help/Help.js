@@ -56,29 +56,24 @@ const Help = () => {
 
   const [issueState, setIssueState] = useState([])
   
-  const [communityissue, setCommunityIssue] = useState(false);
+  const [isOpen, setIssueOpen] = useState(false);
 
 
-  const handleCommunityIssueOpen = _id => {
+  const handleIssueOpen = _id => {
     let issues = issueState
 
     issues = issues.map(issue => {
       if (_id === issue._id) {
-        issue.openCommunity = !issue.openCommunity
+        issue.isOpen = !issue.isOpen
       }
       return issue
     })
-
-    const project = communityissue.project
-    project.issues = issues
-    setCommunityIssue({ project })
+    setIssueState(issues)
   }
 
   const handleClose = () => {
-    setCommunityIssue(false)
-  };
-
-  const [myid, setMyId] = useState('');
+    setIssueOpen(false)
+  }
 
   //displays all comm issues
   useEffect(() => {
@@ -86,21 +81,12 @@ const Help = () => {
       .then( ({ data: issues}) => {
         issues.map(issue => ({
           ...issue,
-          isOpen: false,
-          openCommunity: false
+          isOpen: false
         }))
         issues.reverse()
         setIssueState(issues)
       })
       .catch(err => console.log(err ))
-  //used for opening an issue modal
-    UserAPI.me()
-      .then(res => {
-        const project = res.data
-        setCommunityIssue({ project })
-        setMyId(res.data._id)
-      })
-      .catch(err => console.log(err))
   }, [])
 
   return (
@@ -113,7 +99,7 @@ const Help = () => {
           </Typography>
           {issueState.filter(issue => issue.isPublic === true && issue.status === 'Open' || issue.status === 'In Progress' ).slice(0, 8).map((issueData) => (
             <>
-              <Link onClick={() => handleCommunityIssueOpen(issueData._id)}>
+              <Link onClick={() => handleIssueOpen(issueData._id)}>
                 <CommunityIssueCard
                   key={issueData.id}
                   id={issueData._id}
@@ -125,6 +111,7 @@ const Help = () => {
                 />
               </Link>
 
+
               <CommunityIssueModal
                 id={issueData._id}
                 date={issueData.createdAt}
@@ -132,8 +119,8 @@ const Help = () => {
                 body={issueData.body}
                 author={issueData.author.username}
                 status={issueData.status}
-                open={issueData.openCommunity}
-                handleClose={() => handleCommunityIssueOpen(issueData._id)}
+                open={issueData.isOpen}
+                handleClose={() => handleIssueOpen(issueData._id)}
               />
             </>
           ))}
@@ -145,9 +132,9 @@ const Help = () => {
           <Typography variant="h6" component="h2">
             Recently Solved Issues
           </Typography>
-            {issueState.filter(issue => issue.isPublic === true && issue.status === 'Closed').slice(0, 8).map((issueData) => (
+            {issueState.filter(issue => issue.status === 'Closed').slice(0, 8).map((issueData) => (
               <>
-                <Link onClick={() => handleCommunityIssueOpen(issueData._id)}>
+                <Link onClick={() => handleIssueOpen(issueData._id)}>
                   <CommunityIssueCard
                     key={issueData.id}
                     id={issueData._id}
@@ -166,16 +153,13 @@ const Help = () => {
                   body={issueData.body}
                   author={issueData.author.username}
                   status={issueData.status}
-                  open={issueData.openCommunity}
-                  handleClose={() => handleCommunityIssueOpen(issueData._id)}
+                  open={issueData.isOpen}
+                  handleClose={() => handleIssueOpen(issueData._id)}
                 />
               </>
             ))}
-
           </Grid>
-
         </Grid>
-   
     </>
   )
 }
