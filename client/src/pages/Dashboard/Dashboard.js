@@ -24,9 +24,6 @@ import {
 const useStyles = makeStyles({
   projectcard: {
     padding: 10,
-  },
-  right: {
-    textAlign: 'right',
   }
 })
 
@@ -162,7 +159,7 @@ const Dashboard = () => {
             {/* Project Issues */}
             <Grid item xs={12} lg={8} md={7} sm={7}>
               <Typography variant="h6" component="h2">
-                Project Issues
+                Open Project Issues
               </Typography>
             </Grid>
           </Grid>
@@ -184,7 +181,6 @@ const Dashboard = () => {
                       date={issueData.createdAt}
                       author={issueData.author.name}
                       project={issueData.pid}
-                      // date={issueData._id.getTimestamp}
                     />
                   </Link>
 
